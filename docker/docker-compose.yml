@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: adil-generator-app
+    restart: always
+    working_dir: /var/www/html
+    ports:
+      - 8002:80
+    volumes:
+      - ../:/var/www/html
+  db:
+    container_name: adil-generator-db
+    image: mysql:8.0
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3306
